@@ -1,0 +1,1 @@
+# irods_schema_metadata_templates
