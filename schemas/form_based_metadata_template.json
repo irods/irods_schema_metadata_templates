@@ -1,0 +1,153 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "title":"Metadata template",
+    "description":"JSON schema defining an iRODS metadata template",
+    "type":"object",
+    "properties":{
+        "name":{
+            "description":"The name of the template, e.g. 'dublinCore'",
+            "type":"string"
+        },
+        "type":{
+            "description":"The type of the template, i.e. FORM_BASED",
+            "type":"string",
+            "enum":[
+                "FORM_BASED"
+            ],
+            "default":"FORM_BASED"
+        },
+        "source":{
+            "description":"Where the data to populate the template will come from, i.e. 'USER'",
+            "type":"string",
+            "enum":[
+                "USER"
+            ],
+            "default":"USER"
+        },
+        "destination":{
+            "description":"How the filled-out metadata will be stored, i.e. 'IRODS'",
+            "type":"string",
+            "enum":[
+                "IRODS"
+            ],
+            "default":"IRODS"
+        },
+        "description":{
+            "description":"Helpful text about the specific metadata template",
+            "type":"string"
+        },
+        "author":{
+            "description":"The creator of the template, e.g. 'John Smith'",
+            "type":"string"
+        },
+        "version":{
+            "description":"The version of the template, e.g. '1.0'",
+            "type":"string"
+        },
+        "required":{
+            "description":"Whether this template is required to be applied",
+            "type":"boolean",
+            "default":false
+        },
+        "elements":{
+            "description":"A list of MetadataElements that make up the template",
+            "type":"array",
+            "items":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "description":"The name of the metadata element (should be unique per template)",
+                        "type":"string"
+                    },
+                    "i18nName":{
+                        "description":"The internationalized name of the metadata element (should be unique per template)",
+                        "type":"string"
+                    },
+                    "description":{
+                        "description":"Helpful text about the metadata element",
+                        "type":"string"
+                    },
+                    "i18nDescription":{
+                        "description":"The internationalized help text",
+                        "type":"string"
+                    },
+                    "type":{
+                        "description":"The data type for this element",
+                        "type":"string",
+                        "enum":[
+                            "RAW_STRING",
+                            "RAW_TEXT",
+                            "RAW_URL",
+                            "RAW_INT",
+                            "RAW_FLOAT",
+                            "RAW_BOOLEAN",
+                            "RAW_DATE",
+                            "RAW_TIME",
+                            "RAW_DATETIME",
+                            "REF_IRODS_QUERY",
+                            "REF_IRODS_CATALOG",
+                            "REF_URL",
+			      "LIST_STRING",
+			      "LIST_INT",
+			      "LIST_FLOAT",
+                        ],
+                        "default":"RAW_STRING"
+                    },
+                    "source":{
+                        "description":"Where the data to populate the element will come from, i.e. 'USER'",
+                        "type":"string",
+                        "enum":[
+                            "USER"
+                        ],
+                        "default":"USER"
+                    },
+                    "defaultValue":{
+                        "description":"The default value of this element",
+                        "type":"string"
+                    },
+                    "validationOptions":{
+                        "description":"Options for validation, used in combination with validationStyle",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    },
+                    "validationStyle":{
+                        "description":"Validation style for this element, used in combination with validationOptions",
+                        "type":"string",
+                        "enum":[
+                            "DEFAULT",
+                            "IS",
+                            "IN_LIST",
+                            "IN_RANGE",
+                            "IN_RANGE_EXCLUSIVE",
+                            "REGEX",
+                            "FOLLOW_REF",
+                            "DO_NOT_VALIDATE"
+                        ],
+                        "default":"DEFAULT"
+                    },
+                    "required":{
+                        "description":"Whether this element is required to be populated",
+                        "type":"boolean",
+                        "default":false
+                    }
+                },
+                "required":[
+                    "name",
+                    "type",
+                    "source",
+                    "validationStyle",
+                    "required"
+                ]
+            }
+        }
+    },
+    "required":[
+        "name",
+        "type",
+        "source",
+        "destination",
+        "required"
+    ]
+}
